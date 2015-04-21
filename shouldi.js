@@ -7,18 +7,26 @@ var btnFront = btn.querySelector( '.btn-front' ),
 
 btnFront.addEventListener( 'click', function( event ) {
   
-    var i = Math.floor(Math.random()*(5));
-		var out1 = "Yes.";		
-		var out2 = "No.";
+	var date = new Date();
+      	var currentTime = date.getHours();
+	var currentTimeMin = date.getMinutes();
 
-		if(i > 2)
-		{
-			document.getElementById("content").innerHTML = out1;
-		}
-		else
-		{
-			document.getElementById("content").innerHTML = out2;
-		}
+	if (0 <= currentTime && currentTime < 2) {
+       		document.getElementById("content").innerHTML = decision("Well, it's " + currentTime + ":" + currentTimeMin + ". You should probably sleep." , "It's only " + currentTime + ":" + currentTimeMin + ". Just five more minutes." , 8);
+      	}
+      	if (2 <= currentTime && currentTime < 4) {
+       		document.getElementById("content").innerHTML = decision("Nah dude, it's " + currentTime + ":" + currentTimeMin + ". You're good.", "Hell yes, it's " + currentTime + ":" + currentTimeMin + ". What are you doing with your life?", 8);
+      	}
+	if (4 <= currentTime && currentTime < 8) {
+		document.getElementById("content").innerHTML = decision("Unless you're about to go to work like the productive members of society, hell yes.", "At this point, fuck it. All nighter.", 6);
+	}
+      	if (8 <= currentTime && currentTime < 20) 
+	{
+      		document.getElementById("content").innerHTML = decision("Yes. It's " + currentTime + ":" + currentTimeMin + ". This is a perfect time for sleep.", "No you pyscho. It's " + currentTime + ":" + currentTimeMin + ". Be a productive member of society.", 8);
+      	}
+      	if (20 <= currentTime&&currentTime < 24) {
+       		document.getElementById("content").innerHTML = decision("Sure!", "It's " + currentTime + ":" + currentTimeMin + ". Unless you have something important to do tomorrow, keep the productivity going.", 8);
+      	}
   
   var mx = event.clientX - btn.offsetLeft,
       my = event.clientY - btn.offsetTop;
@@ -48,10 +56,26 @@ btnYes.addEventListener( 'click', function( event )
   
 } );
 
-function distance( x1, y1, x2, y2 ) {
+function distance( x1, y1, x2, y2 ) 
+{
   var dx = x1-x2;
   var dy = y1-y2;
   return Math.sqrt( dx*dx + dy*dy );
+}
+
+function decision(string1, string2, x)
+{
+	var i = Math.floor(Math.random()*(x));
+
+	if(i > 2)
+	{
+		return string2;
+	}
+	else
+	{
+		return string1;
+	}
+
 }
 
 }
